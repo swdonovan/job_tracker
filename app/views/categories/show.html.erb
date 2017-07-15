@@ -1,0 +1,12 @@
+<h2><%= @category.title %></h2>
+<p><%= link_to "Edit", edit_category_path(@category) %></p>
+<p><%= link_to "Delete", category_path(@category), method: :delete %></p>
+<p><%= link_to "Categories", categories_path %></p>
+<p><%= link_to "Home", root_path %></p>
+
+
+<ul>
+  <% Job.where(category_id: @category.id).each do |job| %>
+    <li><%= link_to job.title, company_job_path(job) %> - <%= link_to job.company.name, company_path(job.company) %></li>
+  <% end %>
+</ul>

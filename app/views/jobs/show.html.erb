@@ -1,0 +1,28 @@
+Title: <%= @job.title %>
+<br>
+
+Description: <%= @job.description %>
+<br>
+
+Level of Interest: <%= @job.level_of_interest %>
+<br>
+
+City: <%= @job.city %>
+<br>
+
+Company: <%= link_to @job.company.name, company_path(@job.company) %><br />
+
+<%= link_to "Delete", company_job_path(@job), method: :delete %>
+<%= link_to "Edit", edit_company_job_path(@job) %>
+
+<h3>Comments</h3>
+
+<% if @job.comments != nil %>
+  <% @job.comments.created_at_order(@job).each do |comment| %>
+    <%= comment.context %>
+    <%= comment.created_at %><br />
+    <%= render :comment %>
+  <% end %>
+<% else %>
+  <%= render :comment %>
+<% end %>
