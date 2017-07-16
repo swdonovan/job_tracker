@@ -2,10 +2,24 @@ Rails.application.routes.draw do
   root to: 'companies#index'
 
   resources :companies do
-    resources :jobs
+    resources :jobs do
+      resources :comments, only: [:show]
+    end
+  end
+
+  resources :companies, only: [] do
+    resources :contacts, only: [:new, :create]
+  end
+
+  resources :contacts, only: [:new, :create]
+
+  resources :jobs, only: [:show] do
+    resources :comments
   end
 
   resources :categories
+
+  get ':jobs/:sort/:name', to: "jobs#city_sort"
 
 
 

@@ -42,11 +42,19 @@ class JobsController < ApplicationController
     redirect_to company_path(@company)
   end
 
+  def city_sort
+    @jobs = Jobs.where(city: params[:city])
+  end
+
   private
 
   def job_params
+    if params[:job]
     params.require(:job).permit(:title, :description, :level_of_interest, :city,
                                 :category_id)
+    else
+      redirect_to new_company_contact_path
+    end
   end
 
   def set_company

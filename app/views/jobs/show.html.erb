@@ -16,13 +16,11 @@ Company: <%= link_to @job.company.name, company_path(@job.company) %><br />
 <%= link_to "Edit", edit_company_job_path(@job) %>
 
 <h3>Comments</h3>
+<ul>
+  <%= render(partial: 'comments/comment', collection: @job.comments.reverse) %>
+</ul>
 
-<% if @job.comments != nil %>
-  <% @job.comments.created_at_order(@job).each do |comment| %>
-    <%= comment.context %>
-    <%= comment.created_at %><br />
-    <%= render :comment %>
-  <% end %>
-<% else %>
-  <%= render :comment %>
+<%= form_for [@job, Comment.new] do |f| %>
+<%= f.text_area :body, placeholder: "Add a comment" %><br/>
+<%= f.submit "Add Comment" %>
 <% end %>
