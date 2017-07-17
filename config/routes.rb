@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'companies#index'
+  root to: 'dashboards#show'
+  resources :dashboards, only: :show
 
   resources :companies do
     resources :jobs do
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  get ':jobs/:sort/:name', to: "jobs#city_sort"
 
 
 

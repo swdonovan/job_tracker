@@ -1,0 +1,45 @@
+<h1 class="">Dashboard</h1>
+
+<h3>Top Three Jobs by Interest Level</h3>
+<ul>
+  <li>1st -- <%= Job.sort_level_of_interest.first %></li>
+  <li>2nd -- <%= Job.sort_level_of_interest.second %></li>
+  <li>3rd -- <%= Job.sort_level_of_interest.third %></li>
+</ul>
+
+<h3>Jobs By level of Interest</h3>
+<ul>
+  <li>Interest</li>
+  <ul>0-20 -- <% Job.group_level_of_interest(0, 20).each do |job| %>
+    <li><%= job.title %></li>
+  <% end %>
+  </ul>
+  <ul>21-40 -- <% Job.group_level_of_interest(21,40).each do |job| %>
+    <li><%= job.title %></li>
+  <% end %>
+  </ul>
+  <ul>41-60 -- <% Job.group_level_of_interest(41, 60).each do |job| %>
+    <li><%= job.title %></li>
+  <% end %>
+  </ul>
+  <ul>61-80 -- <% Job.group_level_of_interest(61, 80).each do |job| %>
+    <li><%= job.title %></li>
+  <% end %>
+  </ul>
+  <ul>81-100 -- <%= Job.group_level_of_interest(81, 100).each do |job| %>
+    <li><%= job.title %></li>
+  <% end %>
+  </ul>
+</ul>
+
+<h3>Jobs by City</h3>
+
+<ul>
+  <% Job.all_cities.each do |city| %>
+    <ul><%= city %>
+      <% Job.where(city: city).each do |job| %>
+        <li><%= link_to job.title, company_job_path(job.company, job) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>
